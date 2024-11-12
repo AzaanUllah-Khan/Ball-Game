@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .canvas {
+            height: 100vh;
+            width: 100%;
+            background-color: skyblue;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+
+        .ball {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(red,rgb(165, 0, 0));
+            position: absolute;
+            overflow: hidden;
+            top: -70px;
+            left: 20px;
+            transition: all .3s ease-in-out;
+        }
+
+        .ground {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            background-color: rgb(47, 178, 47);
+        }
+        .point{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: linear-gradient(gold,goldenrod);
+            position: absolute;
+            top: 10px;
+            left: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvas">
+        <div class="ground" id="h">
+            <div class="point" id="point"></div>
+            <div class="ball"></div>
+        </div>
+    </div>
+    <script>
+        var num;
+        var y;
+        var ball = document.getElementsByClassName("ball")[0]
+        var left = 20;
+        var deg = 0;
+        gen()
+        ball.style.left = `${left}px`;
+        document.addEventListener("keyup", (event) => {        
+            if(event.key == "ArrowUp" || event.key=="w" || event.key == " "){
+                ball.style.top = "-180px"
+                setTimeout(() => {
+                    ball.style.top = "-70px"
+                }, 300);
+            }
+            else if(event.key == "ArrowLeft" || event.key=="a"){
+                left -= 50;
+                deg -= 50
+                ball.style.rotate = deg+"deg"
+                ball.style.left = `${left-50}px`;
+            }
+            else if(event.key == "ArrowRight" || event.key=="d"){
+                left += 50;
+                deg += 50
+                ball.style.rotate = deg+"deg"
+                ball.style.left = `${left}px`;
+            }
+        })
+        function gen(){
+            num = Math.floor(Math.random()*-180);
+            if(num > -25){
+                num = -25
+            }
+            y = num
+            console.log(num);
+            document.getElementById("point").style.top = y + "px"
+        }
+    </script>
+</body>
+
+</html>
